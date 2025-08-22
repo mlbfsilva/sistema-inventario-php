@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;0,700;0,800;0,900&display=swap');
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Adicionado para melhor controle de layout */
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #DCF2F3;
+    min-height: 100vh; /* Garante que o body ocupa a altura total da viewport */
+    display: flex;
+    flex-direction: column; /* Para o layout principal da página */
+    align-items: center; /* Centraliza o conteúdo horizontalmente, se a página tiver largura fixa */
+    justify-content: flex-start; /* Alinha o conteúdo ao topo, ou center se for o caso do login */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Estilos Globais para o Layout (aplicado no template.php) */
+body.dashboard-layout { /* Adicione esta classe ao body em template.php para o layout do painel */
+    display: flex;
+    flex-direction: row; /* Sidebar e Conteúdo */
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.content { /* Estilo para o <main> em template.php */
+    margin-left: 250px; /* Largura da sidebar */
+    margin-top: 70px; /* Altura do header */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ajusta a largura para o restante da tela */
+    min-height: calc(100vh - 70px); /* Garante que o conteúdo ocupe a altura restante */
+    background-color: #f0f8ff; /* Cor de fundo para o conteúdo principal */
+}
+
+
+/* --- Cabeçalho Principal (menu.php) --- */
+.main-header {
+    position: fixed;
+    background-color: #39a5a8;
+    padding: 20px;
+    width: 100%;
+    height: 70px; /* Altura do cabeçalho */
+    z-index: 1000; /* Z-index alto para ficar acima de tudo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sutil sombra para destaque */
+}
+
+.header-left h3 {
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.header-left span {
+    color: #125e61;
+}
+
+.logout-btn {
+    padding: 8px 15px;
+    background-color: #447779;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #043638;
+}
+
+/* --- Sidebar (menu.php) --- */
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: calc(100% - 70px); /* Altura total menos o cabeçalho */
+    margin-top: 70px; /* Abaixo do cabeçalho */
+    padding-top: 30px;
+    left: 0;
+    background: #56BCC0;
+    transition: 0.5s ease;
+    z-index: 999; /* Z-index menor que o header mas maior que o conteúdo */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+
+.sidebar h3 {
+    color: #575757;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar a {
+    color: #fff;
+    display: block;
+    width: 100%;
+    line-height: 60px;
+    text-decoration: none;
+    padding-left: 40px;
+    box-sizing: border-box;
+    transition: background 0.3s ease;
+}
+
+.sidebar a:hover {
+    background: #39a5a8;
+}
+
+.sidebar ion-icon {
+    padding-right: 12px;
+    vertical-align: middle; /* Alinha o ícone com o texto */
+}
+
+/* --- Estilos do Formulário de Login (index.php) --- */
+.login-header {
+    margin-top: 72px; /* Espaçamento do topo */
+    color: #000;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.login-section {
+    background-color: #DCF2F3;
+    padding: 32px;
+    margin-top: 24px; /* Espaçamento do header */
+    border-radius: 16px;
+    max-width: 418px; /* Largura definida no seu estilo.css original */
+    border: 1px solid #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.form-login h3 {
+    color: #000;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.form-login p {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ocupa a largura total do pai */
+}
+
+.label-form {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 8px; /* Espaçamento entre label e input */
+}
+
+.input-form {
+    height: 40px; /* Aumentado para melhor usabilidade */
+    width: 100%; /* Ajusta à largura do form-group */
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc; /* Borda mais visível */
+    box-sizing: border-box; /* Garante que padding e border não aumentam a largura */
+}
+
+.button-login {
+    height: 54px;
+    width: 100%; /* Ajusta à largura do formulário */
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    color: #F5F5F5;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    background: #57BCC0;
+    border: 1px solid #57BCC0; /* Corrigido para uma borda com a mesma cor do fundo */
+    cursor: pointer;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.button-login:hover {
+    background-color: #0D7C81;
+    border-color: #0D7C81;
+}
+
+.error-message {
+    color: red;
+    background-color: #ffe0e0;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+/* --- Estilos para Formulários de Busca (painel.php, historico.php, servidores.php) --- */
+.form-busca {
+    padding: 20px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-busca form {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas menores */
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os campos e botões */
+    width: 100%; /* Ocupa a largura total do .form-busca */
+}
+
+.form-busca h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #043638;
+    width: 100%; /* Garante que o título ocupe a largura total */
+    margin-bottom: 10px;
+}
+
+.form-busca p {
+    width: 100%; /* Garante que a descrição ocupe a largura total */
+    margin-bottom: 5px;
+}
+
+.form-busca input {
+    flex-grow: 1; /* Permite que o input cresça para preencher o espaço disponível */
+    padding: 10px;
+    height: 40px; /* Aumentado para melhor usabilidade */
+    background-color: #bbc6c7;
+    border-radius: 8px;
+    border: 1px solid #bbc6c7;
+    font-size: 14px;
+    outline: none; /* Remove o contorno padrão ao focar */
+}
+
+.btn-busca,
+.btn-novo {
+    padding: 10px 20px; /* Aumentado o padding para botões maiores */
+    height: 40px;
+    text-align: center;
+    border-radius: 8px;
+    border: none; /* Remover borda padrão se não quiser */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #fff; /* Cor do texto dos botões */
+    font-weight: 500;
+}
+
+.btn-busca {
+    background-color: #56BCC0;
+}
+
+.btn-busca:hover {
+    background: #2aa4a8;
+}
+
+.btn-novo {
+    background-color: #56c056;
+}
+
+.btn-novo:hover {
+    background: #3b7a3b;
+}
+
+/* Estilos para tabelas de busca (se existirem) */
+.table-busca, .list-busca {
+    width: 100%;
+    max-width: 90%;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow-x: auto; /* Para tabelas grandes em telas pequenas */
+}
+
+.table-busca table, .list-busca table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-busca th, .list-busca th,
+.table-busca td, .list-busca td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-busca th, .list-busca th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: 600;
+}
+
+.table-busca tr:hover, .list-busca tr:hover {
+    background-color: #f5f5f5;
+}
+
+.acoes a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 18px;
+}
+.paginacao {
+    margin-top: 20px;
+    text-align: center;
+}
+.paginacao a {
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+}
+.paginacao a:hover {
+    background-color: #eee;
+}
+
+.btn-confirmar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-confirmar:hover {
+    background-color: #45a049;
+}
+
+.btn-cancelar {
+    background-color: #e43333;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #a02626;
+}
+
+.form-container {
+  margin-top: 100px; /* distância do topo para o header */
+  padding: 20px;
+}
+
+.form-editar {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: -48px; /* centraliza na horizontal */
+}
