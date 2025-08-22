@@ -23,7 +23,12 @@ if($pesquisa != ''){
     $total_registros = $total_resultado['total'];
     $total_paginas = ceil($total_registros / $itens_por_pagina);
 
-    $sql_code = "SELECT * FROM patrimonio $condicao ORDER BY coordenacao ASC LIMIT $itens_por_pagina OFFSET $offset";
+    $sql_code = "SELECT p.*, u.nome 
+             FROM patrimonio p
+             LEFT JOIN servidorpublico u ON p.matricula = u.matricula
+             $condicao
+             ORDER BY p.coordenacao ASC
+             LIMIT $itens_por_pagina OFFSET $offset";
     $sql_query = $mysqli->query($sql_code) or die ("Erro ao consultar: " . $mysqli->error);
 ?>
 
@@ -61,7 +66,7 @@ if($pesquisa != ''){
                     <td><?= htmlspecialchars($row['marca']) ?></td>
                     <td><?= htmlspecialchars($row['situacao']) ?></td>
                     <td><?= htmlspecialchars($row['coordenacao']) ?></td>
-                    <td><?= htmlspecialchars($row['matricula']) ?></td>
+                    <td><?= htmlspecialchars($row['nome']) ?></td>
                     <td>
                         <a href="crud/editar_patri.php?codigo_mec=<?=urlencode($row['codigo_mec']) ?>" class="btn-editar" title="Editar">
                             <box-icon name='pencil'></box-icon>
