@@ -38,8 +38,17 @@ include("../conexao.php");
 
 if(isset($_GET['codigo_mec'])){
     $codigo_mec = $mysqli->real_escape_string($_GET['codigo_mec']);
-    $resultado = $mysqli->query("SELECT * FROM patrimonio WHERE codigo_mec = '$codigo_mec'") or die ($mysqli->error);
-    $item = $resultado->fetch_assoc();
+  $resultado = $mysqli->query("
+    SELECT p.*,
+           u.nome AS nome_usuario,
+           a.nome AS nome_agente
+    FROM patrimonio p
+    LEFT JOIN servidorpublico u ON u.matricula = p.matricula
+    LEFT JOIN servidorpublico a ON a.matricula = p.matricula_agente
+    WHERE p.codigo_mec = '$codigo_mec'
+    ") or die($mysqli->error);
+
+$item = $resultado->fetch_assoc();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $descricao = $mysqli->real_escape_string($_POST['descricao']);
@@ -107,8 +116,15 @@ if(isset($_GET['codigo_mec'])){
         <label class="label-form">Matrícula do Usuário:</label>
         <input name="matricula" class="input-form" value="<?= htmlspecialchars($item['matricula']) ?>">
 
+        <label class="label-form">Nome do Usuário:</label>
+        <p class="input-form-blocked"><strong><?= htmlspecialchars($item['nome_usuario']) ?></strong></p>
+
+
         <label class="label-form">Matrícula do Agente Consignatário:</label>
         <input name="matricula_agente" class="input-form" value="<?= htmlspecialchars($item['matricula_agente']) ?>">
+
+        <label class="label-form">Nome do Agente Consignatário:</label>
+        <p class="input-form-blocked"><strong><?= htmlspecialchars($item['nome_agente']) ?></strong></p>
 
         <button type="submit" class="btn-confirmar">Salvar alterações</button>
         <button type="button" onclick="<?php header("Location= ../templante.php")?>" class="btn-cancelar">Cancelar</button>
