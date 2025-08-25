@@ -117,14 +117,14 @@ $item = $resultado->fetch_assoc();
         <input name="matricula" class="input-form" value="<?= htmlspecialchars($item['matricula']) ?>">
 
         <label class="label-form">Nome do Usuário:</label>
-        <p class="input-form-blocked"><strong><?= htmlspecialchars($item['nome_usuario']) ?></strong></p>
+        <input name="nome_usuario" class="input-form" value="<?= htmlspecialchars($item['nome_usuario']) ?>" readonly>
 
 
         <label class="label-form">Matrícula do Agente Consignatário:</label>
         <input name="matricula_agente" class="input-form" value="<?= htmlspecialchars($item['matricula_agente']) ?>">
 
         <label class="label-form">Nome do Agente Consignatário:</label>
-        <p class="input-form-blocked"><strong><?= htmlspecialchars($item['nome_agente']) ?></strong></p>
+        <input name="nome_agente" class="input-form" value="<?= htmlspecialchars($item['nome_agente']) ?>" readonly>
 
         <button type="submit" class="btn-confirmar">Salvar alterações</button>
         <button type="button" onclick="<?php header("Location= ../templante.php")?>" class="btn-cancelar">Cancelar</button>
