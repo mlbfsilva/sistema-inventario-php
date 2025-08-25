@@ -181,16 +181,6 @@ body.dashboard-layout { /* Adicione esta classe ao body em template.php para o l
     border: 1px solid #ccc; /* Borda mais visível */
     box-sizing: border-box; /* Garante que padding e border não aumentam a largura */
 }
-.input-form-blocked p{
-    height: 40px; 
-    width: 100%; 
-    padding: 10px;
-    margin: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    
-}
 
 .button-login {
     height: 54px;
