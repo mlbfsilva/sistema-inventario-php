@@ -268,6 +268,7 @@ body.dashboard-layout { /* Adicione esta classe ao body em template.php para o l
     transition: background-color 0.3s ease;
     color: #fff; /* Cor do texto dos botões */
     font-weight: 500;
+    text-decoration: none;
 }
 
 .btn-busca {

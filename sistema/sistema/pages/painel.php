@@ -39,7 +39,7 @@ if($pesquisa != ''){
         <br>
         <input name="busca" placeholder="Digite para pesquisar" type="text">
         <button class="btn-busca" type="submit">Pesquisar</button>
-        <button class="btn-novo">Cadastrar</button>
+        <a href="./crud/novo_patri.php" class="btn-novo">Cadastrar</a>
     </form>
 </div>
 
