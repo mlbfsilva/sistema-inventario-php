@@ -69,12 +69,12 @@ if($pesquisa != ''){
                     <td><?= htmlspecialchars($row['nome']) ?></td>
                     <td>
                         <a href="crud/editar_patri.php?codigo_mec=<?=urlencode($row['codigo_mec']) ?>" class="btn-editar" title="Editar">
-                            <box-icon name='pencil'></box-icon>
+                            <i class='bx bx-pencil'></i>
                         </a>
                     </td>
                     <td>
                         <a href="crud/excluir_patri.php?codigo_mec=<?= urlencode($row['codigo_mec']) ?>" class="btn-excluir" title="Excluir" onclick="return confirm('Deseja realmente excluir este item?');">
-                            <box-icon name='trash-alt'></box-icon>
+                            <i class='bx bx-trash'></i>
                         </a>
                     </td>
                 </tr>

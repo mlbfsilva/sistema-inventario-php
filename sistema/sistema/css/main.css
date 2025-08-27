@@ -76,7 +76,29 @@ body.dashboard-layout { /* Adicione esta classe ao body em template.php para o l
 .logout-btn:hover {
     background: #043638;
 }
+.btn-editar{
+    font-size: 24px;
+    vertical-align: middle;
+    align-items: center;
+    transition: transform 0.2s ease, color 0.3s ease;
+    color: #BBC6C7;
+}
 
+.btn-editar:hover .bx {
+    color: #1e7e34;
+    transform: scale(1.2); 
+}
+.btn-excluir{
+    font-size: 24px;
+    vertical-align: middle;
+    align-items: center;
+    transition: transform 0.2s ease, color 0.3s ease;
+    color: #BBC6C7;
+}
+.btn-excluir:hover{
+    color: #E43333;
+    transform: scale(1.2); 
+}
 /* --- Sidebar (menu.php) --- */
 .sidebar {
     position: fixed;
