@@ -1,5 +1,5 @@
 <?php 
-include('./conexao.php');
+include('conexao.php');
 
 
 $itens_por_pagina = 15;
@@ -39,8 +39,9 @@ if($pesquisa != ''){
         <br>
         <input name="busca" placeholder="Digite para pesquisar" type="text">
         <button class="btn-busca" type="submit">Pesquisar</button>
-        <a href="./crud/novo_patri.php" class="btn-novo">Cadastrar</a>
+        <a href="crud/novo_patri.php" class="btn-novo">Cadastrar</a>
     </form>
+        
 </div>
 
 <div class="table-busca">
