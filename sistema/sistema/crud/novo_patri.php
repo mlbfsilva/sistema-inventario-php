@@ -36,21 +36,8 @@
 <?php 
 include("../conexao.php");
 
-if(isset($_GET['codigo_mec'])){
-    $codigo_mec = $mysqli->real_escape_string($_GET['codigo_mec']);
-  $resultado = $mysqli->query("
-    SELECT p.*,
-           u.nome AS nome_usuario,
-           a.nome AS nome_agente
-    FROM patrimonio p
-    LEFT JOIN servidorpublico u ON u.matricula = p.matricula
-    LEFT JOIN servidorpublico a ON a.matricula = p.matricula_agente
-    WHERE p.codigo_mec = '$codigo_mec'
-    ") or die($mysqli->error);
-
-$item = $resultado->fetch_assoc();
-
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $codigo_mec = $mysqli->real_escape_string($_POST['codigo_mec']);
         $descricao = $mysqli->real_escape_string($_POST['descricao']);
         $tipo = $mysqli->real_escape_string($_POST['tipo']);
         $situacao = $mysqli->real_escape_string($_POST['situacao']);
@@ -62,7 +49,8 @@ $item = $resultado->fetch_assoc();
         $matricula = $mysqli->real_escape_string($_POST['matricula']);
         $matricula_agente = $mysqli->real_escape_string($_POST['matricula_agente']);
 
-        $sql = "INSERT patrimonio SET
+        $sql = "INSERT IGNORE patrimonio SET
+                    codigo_mec       = '$codigo_mec';
                     descricao        = '$descricao',
                     tipo             = '$tipo',
                     situacao         = '$situacao',
@@ -72,8 +60,7 @@ $item = $resultado->fetch_assoc();
                     coordenacao      = '$coordenacao',
                     observacoes      = '$observacoes',
                     matricula        = '$matricula',
-                    matricula_agente = '$matricula_agente'
-                WHERE NOT EXISTS codigo_mec     = '$codigo_mec'";
+                    matricula_agente = '$matricula_agente'";
 
         if($mysqli->query($sql)) {
             header("Location: ../template.php?msg=editado");
@@ -82,52 +69,48 @@ $item = $resultado->fetch_assoc();
             echo "Erro ao editar: " . $mysqli->error;
         }
     }
-}
+
 ?>
 
 <div class="form-container">
     <form method="post" class="form-editar">
         <h3>Adicionar Novo Patrimônio</h3>
         <br>
+        <label class="label-form">Código MEC (RGP):</label>
+        <input name="codigo_mec" class="input-form">
+
         <label class="label-form">Descrição:</label>
-        <input name="descricao" class="input-form" value="<?= htmlspecialchars($item['descricao']) ?>">
+        <input name="descricao" class="input-form">
 
         <label class="label-form">Tipo:</label>
-        <input name="tipo" class="input-form" value="<?= htmlspecialchars($item['tipo']) ?>">
+        <input name="tipo" class="input-form">
 
         <label class="label-form">Situação:</label>
-        <input name="situacao" class="input-form" value="<?= htmlspecialchars($item['situacao']) ?>">
+        <input name="situacao" class="input-form">
 
         <label class="label-form">Modelo:</label>
-        <input name="modelo" class="input-form" value="<?= htmlspecialchars($item['modelo']) ?>">
+        <input name="modelo" class="input-form">
 
         <label class="label-form">Marca:</label>
-        <input name="marca" class="input-form" value="<?= htmlspecialchars($item['marca']) ?>">
+        <input name="marca" class="input-form">
 
         <label class="label-form">Estado Físico:</label>
-        <input name="estado_fisico" class="input-form" value="<?= htmlspecialchars($item['estado_fisico']) ?>">
+        <input name="estado_fisico" class="input-form">
 
         <label class="label-form">Coordenação:</label>
-        <input name="coordenacao" class="input-form" value="<?= htmlspecialchars($item['coordenacao']) ?>">
+        <input name="coordenacao" class="input-form">
 
         <label class="label-form">Observações:</label>
-        <input name="observacoes" class="input-form" value="<?= htmlspecialchars($item['observacoes']) ?>">
+        <input name="observacoes" class="input-form">
 
         <label class="label-form">Matrícula do Usuário:</label>
-        <input name="matricula" class="input-form" value="<?= htmlspecialchars($item['matricula']) ?>">
-
-        <label class="label-form">Nome do Usuário:</label>
-        <input name="nome_usuario" class="input-form" value="<?= htmlspecialchars($item['nome_usuario']) ?>" readonly>
-
+        <input name="matricula" class="input-form">
 
         <label class="label-form">Matrícula do Agente Consignatário:</label>
-        <input name="matricula_agente" class="input-form" value="<?= htmlspecialchars($item['matricula_agente']) ?>">
-
-        <label class="label-form">Nome do Agente Consignatário:</label>
-        <input name="nome_agente" class="input-form" value="<?= htmlspecialchars($item['nome_agente']) ?>" readonly>
+        <input name="matricula_agente" class="input-form">
 
         <button type="submit" class="btn-confirmar">Salvar alterações</button>
-        <button type="button" onclick="<?php header("Location= ../templante.php")?>" class="btn-cancelar">Cancelar</button>
+        <a href="../template.php" class="btn-cancelar">Cancelar</a>
     </form>
 </div>
 
