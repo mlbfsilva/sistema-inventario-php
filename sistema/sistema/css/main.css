@@ -283,6 +283,7 @@ body.dashboard-layout { /* Adicione esta classe ao body em template.php para o l
 .btn-novo {
     padding: 10px 20px; /* Aumentado o padding para botões maiores */
     height: 40px;
+    font-size: 16px;
     text-align: center;
     border-radius: 8px;
     border: none; /* Remover borda padrão se não quiser */
