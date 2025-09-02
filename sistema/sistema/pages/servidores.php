@@ -31,7 +31,7 @@ if ($pesquisa != '') {
 <div class="form-busca">
     <form action="" method="GET">
         <h1>Servidores</h1>
-        <p>Para pesquisar o servidor, digite a matrícula ou nome</p>
+        <p>Para pesquisar o servidor, digite a matrícula, nome ou setor.</p>
         <br>
         <input name="busca" placeholder="Digite para pesquisar" type="text">
         <button class="btn-busca" type="submit">Pesquisar</button>
@@ -48,7 +48,8 @@ if ($pesquisa != '') {
         <th>Setor</th>
         <th>Função</th>
         <th>Agente Consignatário</th>
-        <th>Ações</th> 
+        <th>Editar</th>
+        <th>Excluir</th> 
     </tr>
 
     <?php if ($sql_query && $sql_query->num_rows > 0): ?>
@@ -61,15 +62,15 @@ if ($pesquisa != '') {
                 <td><?= htmlspecialchars($row['funcao']) ?></td>
                 <td><?= $row['is_agente_consignatario'] ? 'Sim' : 'Não' ?></td>
                 <td>
-                  
                     <a href="editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
                         <i class='bx bx-pencil'></i>
                     </a>
                  
+                </td>
+                <td>
                     <a href="excluir_servidor.php?matricula=<?= $row['matricula'] ?>" class="btn-excluir" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este servidor?')">
                        <i class='bx bx-trash'></i>
-                    </a>
-                </td>
+                    </a></td>
             </tr>
         <?php endwhile; ?>
     <?php else: ?>
