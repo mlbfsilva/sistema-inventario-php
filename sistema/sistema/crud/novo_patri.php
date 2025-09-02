@@ -49,18 +49,10 @@ include("../conexao.php");
         $matricula = $mysqli->real_escape_string($_POST['matricula']);
         $matricula_agente = $mysqli->real_escape_string($_POST['matricula_agente']);
 
-        $sql = "INSERT IGNORE patrimonio SET
-                    codigo_mec       = '$codigo_mec';
-                    descricao        = '$descricao',
-                    tipo             = '$tipo',
-                    situacao         = '$situacao',
-                    modelo           = '$modelo',
-                    marca            = '$marca',
-                    estado_fisico    = '$estado_fisico',
-                    coordenacao      = '$coordenacao',
-                    observacoes      = '$observacoes',
-                    matricula        = '$matricula',
-                    matricula_agente = '$matricula_agente'";
+        $sql = "INSERT IGNORE INTO patrimonio
+                (codigo_mec, descricao, tipo, situacao, modelo, marca, estado_fisico, coordenacao, observacoes, matricula, matricula_agente)
+                VALUES 
+                ('$codigo_mec','$descricao','$tipo','$situacao','$modelo','$marca','$estado_fisico','$coordenacao','$observacoes','$matricula','$matricula_agente')";
 
         if($mysqli->query($sql)) {
             header("Location: ../template.php?msg=editado");
