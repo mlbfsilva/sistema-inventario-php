@@ -1,22 +1,35 @@
 <?php 
 include('conexao.php');
 
-$sql_query = null;
+$itens_por_pagina = 15;
+$pagina = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? intval($_GET['pagina']) : 1;
+$offset = ($pagina - 1) * $itens_por_pagina;
 
-if (isset($_GET['busca'])) {
-    $pesquisa = $mysqli->real_escape_string($_GET['busca']);
-    $sql_code = "SELECT * FROM servidorpublico
-        WHERE matricula LIKE '$pesquisa%'
-        OR nome LIKE '$pesquisa%'
-        OR email LIKE '$pesquisa%'
-        OR setor LIKE '$pesquisa%'
-        OR funcao LIKE '$pesquisa%'";
-    $sql_query = $mysqli->query($sql_code) or die("Erro ao consultar: " . $mysqli->error);
+$pesquisa = isset($_GET['busca']) ? $mysqli->real_escape_string($_GET['busca']) : '';
+$condicao = '';
+if ($pesquisa != '') {
+    $condicao = "WHERE matricula LIKE '$pesquisa%'
+                  OR nome LIKE '$pesquisa%'
+                  OR email LIKE '$pesquisa%'
+                  OR setor LIKE '$pesquisa%'
+                  OR funcao LIKE '$pesquisa%'";
+        
 }
+    $sql_total = "SELECT COUNT(*) as total from servidorpublico $condicao";
+    $total_query = $mysqli->query($sql_total) or die("Erro ao consultar resultados". $mysqli->error);
+    $total_resultado = $total_query->fetch_assoc();
+    $total_registros = $total_resultado['total'];
+    $total_paginas = ceil($total_registros / $itens_por_pagina);
+
+    $sql_code = "SELECT * from servidorpublico
+                $condicao
+                ORDER BY setor ASC
+                LIMIT $itens_por_pagina OFFSET $offset";
+    $sql_query = $mysqli->query($sql_code) or die("Erro ao consultar: ". $mysqli->error);''
 ?>
 
 <div class="form-busca">
-    <form action="">
+    <form action="" method="GET">
         <h1>Servidores</h1>
         <p>Para pesquisar o servidor, digite a matrícula ou nome</p>
         <br>
@@ -48,13 +61,13 @@ if (isset($_GET['busca'])) {
                 <td><?= htmlspecialchars($row['funcao']) ?></td>
                 <td><?= $row['is_agente_consignatario'] ? 'Sim' : 'Não' ?></td>
                 <td>
-                    <!-- Ícone de editar -->
-                    <a href="editar_servidor.php?matricula=<?= $row['matricula'] ?>" title="Editar">
-                        <i class="fas fa-edit" style="color: #007bff; margin-right: 10px;"></i>
+                  
+                    <a href="editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
+                        <i class='bx bx-pencil'></i>
                     </a>
-                    <!-- Ícone de excluir -->
-                    <a href="excluir_servidor.php?matricula=<?= $row['matricula'] ?>" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este servidor?')">
-                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                 
+                    <a href="excluir_servidor.php?matricula=<?= $row['matricula'] ?>" class="btn-excluir" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este servidor?')">
+                       <i class='bx bx-trash'></i>
                     </a>
                 </td>
             </tr>
@@ -65,3 +78,13 @@ if (isset($_GET['busca'])) {
         </tr>
     <?php endif; ?>
 </table>
+
+<div class="paginacao">
+        <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+        <a href="?pagina=<?= $i ?><?= isset($pesquisa) ? '&busca=' . urlencode($pesquisa) : '' ?>"
+           style="margin:0 5px; <?= ($i == $pagina) ? 'font-weight:bold;' : '' ?>">
+           <?= $i ?>
+        </a>
+        <?php endfor; ?>
+    </div>
+</div>
