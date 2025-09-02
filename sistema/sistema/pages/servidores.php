@@ -68,7 +68,7 @@ if ($pesquisa != '') {
                  
                 </td>
                 <td>
-                    <a href="excluir_servidor.php?matricula=<?= $row['matricula'] ?>" class="btn-excluir" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este servidor?')">
+                    <a href="crud/excluir_servidor.php?matricula=<?= $row['matricula'] ?>" class="btn-excluir" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir este servidor?')">
                        <i class='bx bx-trash'></i>
                     </a></td>
             </tr>
