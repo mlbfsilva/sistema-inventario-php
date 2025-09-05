@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Patrimônio</title>
+    <title>Adicionar Patrimônio</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body class="dashboard-layout"> 

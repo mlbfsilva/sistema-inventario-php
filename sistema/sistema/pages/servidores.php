@@ -35,7 +35,7 @@ if ($pesquisa != '') {
         <br>
         <input name="busca" placeholder="Digite para pesquisar" type="text">
         <button class="btn-busca" type="submit">Pesquisar</button>
-        <button class="btn-novo">Cadastrar</button>
+        <a href="crud/novo_servidor.php" class="btn-novo">Cadastrar</a>
     </form>
 </div>
 
@@ -62,7 +62,7 @@ if ($pesquisa != '') {
                 <td><?= htmlspecialchars($row['funcao']) ?></td>
                 <td><?= $row['is_agente_consignatario'] ? 'Sim' : 'Não' ?></td>
                 <td>
-                    <a href="editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
+                    <a href="crud/editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
                         <i class='bx bx-pencil'></i>
                     </a>
                  
