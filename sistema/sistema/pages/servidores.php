@@ -62,7 +62,7 @@ if ($pesquisa != '') {
                 <td><?= htmlspecialchars($row['funcao']) ?></td>
                 <td><?= $row['is_agente_consignatario'] ? 'Sim' : 'Não' ?></td>
                 <td>
-                    <a href="editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
+                    <a href="crud/editar_servidor.php?matricula=<?= $row['matricula'] ?>"  class="btn-editar" title="Editar">
                         <i class='bx bx-pencil'></i>
                     </a>
                  
